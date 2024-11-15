@@ -9,3 +9,13 @@ export const createProduct = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getProducts = async (req, res, next) => {
+  try {
+    const getAllProducts = await Product.find();
+    res.status(200).json(getAllProducts);
+  } catch (err) {
+    // res.status(500).json(err);
+    next(err);
+  }
+};
