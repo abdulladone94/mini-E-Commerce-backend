@@ -28,3 +28,18 @@ export const getProduct = async (req, res, next) => {
     next(err);
   }
 };
+
+export const updateProduct = async (req, res, next) => {
+  try {
+    const editProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(201).json(editProduct);
+  } catch (err) {
+    next(err);
+  }
+};
