@@ -43,3 +43,12 @@ export const updateProduct = async (req, res, next) => {
     next(err);
   }
 };
+
+export const deleteProduct = async (req, res, next) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json("Product has been deleted");
+  } catch (err) {
+    next(err);
+  }
+};
