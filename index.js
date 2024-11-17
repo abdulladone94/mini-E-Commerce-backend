@@ -24,7 +24,19 @@ mongoose.connection.on("disconnected", () => {
   console.log("MongoDB disconnected!");
 });
 
-app.use("/api/auth", productRoute);
+app.use("/api/products", productRoute);
+
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "something went wrong";
+
+  res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
+});
 
 app.listen(8800, () => {
   connect();
