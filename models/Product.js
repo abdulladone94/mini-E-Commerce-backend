@@ -34,6 +34,15 @@ const ProductSchema = new Schema(
       required: true,
       trim: true,
     },
+    price: {
+      type: Number,
+      required: true, // Price is mandatory
+      min: 0, // Ensures price is non-negative
+    },
+    isFavorite: {
+      type: Boolean,
+      default: false, // Defaults to false if not provided
+    },
   },
   {
     timestamps: true, // Adds createdAt and updatedAt fields automatically
